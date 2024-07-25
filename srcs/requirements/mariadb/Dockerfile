@@ -4,18 +4,16 @@ RUN apt-get update \
 	&& apt upgrade -y \
 	&& apt install mariadb-server mariadb-client -y \
 	&& apt install vim -y \
-	&& apt install sudo
-	#apt-get install mysql-server -y 
-#&& apt install systemd \
+	&& apt install sudo 
+	#&& sudo mysqld_safe & <enter $MYSQL_ROOT_PASSWORD password>
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+#I do not think it is madotory to entry directly inside mariadb at the start of the program
+#COPY entrypoint.sh /entrypoint.sh
+#ENTRYPOINT ["/entrypoint.sh"]
+
+#RUN chmod +x /entrypoint.sh
 EXPOSE 3306
-ENTRYPOINT ["/entrypoint.sh"]
-# Copy custom NGINX configuration file
-#COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 443 for HTTPS
+# Set environment variables MySQL
+#ENV MYSQL_ROOT_PASSWORD=my-secret-pw
 
-# Run NGINX in the foreground
-#CMD ["sh", "-c", "service mysql start && tail -f /dev/null"]

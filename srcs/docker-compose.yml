@@ -4,11 +4,7 @@ services:
       context: /sgoinfre/students/blarger/Inception/srcs/requirements/mariadb
       dockerfile: Dockerfile
     container_name: my-mariadb-container
-    environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
+    env_file: "maria.env"
     ports:
       - "3306:3306"
     volumes:
