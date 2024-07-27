@@ -12,3 +12,4 @@ services:
 
 volumes:
   mariadb_data:
+    driver: local
