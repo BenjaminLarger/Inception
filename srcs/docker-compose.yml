@@ -1,10 +1,24 @@
 services:
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: my-wordpress-container
+    #   env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+    expose:
+      - "9000"
+    volumes:
+      - wordpress_data:/var/www/html
+  #   network:
+  #      - app-network
   mariadb:
-    build:
-      context: /sgoinfre/students/blarger/Inception/srcs/requirements/mariadb
-      dockerfile: Dockerfile
+    build: ./requirements/mariadb
     container_name: my-mariadb-container
-    env_file: "maria.env"
+    env_file: .env
+    #    env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
     ports:
       - "3306:3306"
     volumes:
@@ -13,3 +27,8 @@ services:
 volumes:
   mariadb_data:
     driver: local
+  wordpress_data:
+    driver: local
+  #networks:
+  # app-network:
+  #  driver: bridge
