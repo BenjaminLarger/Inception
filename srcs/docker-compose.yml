@@ -2,6 +2,7 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: my-wordpress-container
+    env_file: .env
     #   env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
     environment:
       - WORDPRESS_DB_HOST=db:3306
