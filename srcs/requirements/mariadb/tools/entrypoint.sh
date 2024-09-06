@@ -27,6 +27,6 @@ mysql -e "FLUSH PRIVILEGES;"
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
 mysqld_safe &
 
-# Open a bash shell
+# Open a bash shell -> delete
 echo "Opening bash shell..."
 exec bash
