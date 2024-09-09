@@ -20,7 +20,9 @@ RUN useradd -m -d /home/wpuser -s /bin/bash wpuser
 #	mysql_secure_installation ask for password
 #We add clear_env=no and 
 COPY conf/php.ini /etc/php/8.2/fpm/php.ini
-
+COPY tools/auto_config.sh /auto_config.sh
+RUN chmod +x /auto_config.sh
+RUN mkdir -p /var/www/wordpress
 ENTRYPOINT ["/auto_config.sh"]
 
 

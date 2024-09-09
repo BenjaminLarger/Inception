@@ -11,14 +11,3 @@ COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-#ENTRYPOINT service mysql start && mysqld_safe
-
-
-#COPY entrypoint.sh /entrypoint.sh
-#RUN chmod +x entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
-
-# Set environment variables MySQL
-#ENV MYSQL_ROOT_PASSWORD=my-secret-pw
-##Launch SQL ====> mysqld_safe & ; mysql -u root -p
-

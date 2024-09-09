@@ -12,7 +12,7 @@ ERASE_LINE=\033[A\033[K
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 .PHONY: help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell
 
-all : up
+all: mariadb wordpress nginx
 build:
 	@echo -e "${YELLOW}⏳ building...${THIS_FILE} {NC}"
 	docker-compose -f srcs/docker-compose.yml build $(c)
@@ -48,12 +48,18 @@ ps:
 mariadb:
 	@echo -e "${YELLOW}⏳ starting mariadb...${THIS_FILE} {NC}"
 	docker-compose -f srcs/docker-compose.yml build $(c)
-	docker-compose -f srcs/docker-compose.yml up -d $(c)
+	docker-compose -f srcs/docker-compose.yml up -d mariadb
 	@(cd srcs && docker-compose run --rm mariadb /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 wordpress:
-	@echo -e "${YELLOW}⏳ starting mariadb...${THIS_FILE} {NC} "
+	@echo -e "${YELLOW}⏳ starting wordpress, $(c)...${THIS_FILE} {NC} "
 	docker-compose -f srcs/docker-compose.yml build $(c)
-	docker-compose -f srcs/docker-compose.yml up -d $(c)
+	docker-compose -f srcs/docker-compose.yml up -d wordpress
 	@(cd srcs && docker-compose run --rm wordpress /bin/bash)
+	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
+nginx:
+	@echo -e "${YELLOW}⏳ starting nginx...${THIS_FILE} {NC} "
+	docker-compose -f srcs/docker-compose.yml build $(c)
+	docker-compose -f srcs/docker-compose.yml up -d nginx
+	@(cd srcs && docker-compose run --rm nginx /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
