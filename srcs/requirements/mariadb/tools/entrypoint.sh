@@ -30,7 +30,8 @@ mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_
 
 # Give all privileges to the user
 echo "Granting usage privileges to the user..."
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT USAGE ON *.* TO '${MYSQL_USER}'@'${_HOST}'; GRANT ALL ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'${_HOST}';"
+mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'; FLUSH PRIVILEGES;"
+#mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT USAGE ON *.* TO '${MYSQL_USER}'@'${_HOST}'; GRANT ALL ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'${_HOST}';"
 
 # Reload the database
 echo "Flushing privileges..."

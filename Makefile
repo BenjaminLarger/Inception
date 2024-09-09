@@ -47,19 +47,19 @@ ps:
 	docker ps
 mariadb:
 	@echo -e "${YELLOW}⏳ starting mariadb...${THIS_FILE} {NC}"
-	docker-compose -f srcs/docker-compose.yml build $(c)
+	docker-compose -f srcs/docker-compose.yml build mariadb
 	docker-compose -f srcs/docker-compose.yml up -d mariadb
 	@(cd srcs && docker-compose run --rm mariadb /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 wordpress:
 	@echo -e "${YELLOW}⏳ starting wordpress, $(c)...${THIS_FILE} {NC} "
-	docker-compose -f srcs/docker-compose.yml build $(c)
-	docker-compose -f srcs/docker-compose.yml up -d wordpress
+	docker compose -f srcs/docker-compose.yml up --build wordpress
+#	docker-compose -f srcs/docker-compose.yml up -d wordpress
 	@(cd srcs && docker-compose run --rm wordpress /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 nginx:
 	@echo -e "${YELLOW}⏳ starting nginx...${THIS_FILE} {NC} "
-	docker-compose -f srcs/docker-compose.yml build $(c)
-	docker-compose -f srcs/docker-compose.yml up -d nginx
+	docker compose -f srcs/docker-compose.yml up --build nginx
+#	docker-compose -f srcs/docker-compose.yml up -d nginx
 	@(cd srcs && docker-compose run --rm nginx /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"

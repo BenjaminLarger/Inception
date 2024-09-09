@@ -19,5 +19,5 @@ fi
 #wp core install
 #wp user create
 # Open a bash shell
-#echo "Opening bash shell..."
-#exec bash
+echo "Opening bash shell..."
+exec bash
