@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:10.11
 
 RUN apt-get update \
 	&& apt upgrade -y \
@@ -8,7 +8,10 @@ RUN apt-get update \
 
 RUN mkdir -p /etc/nginx/ssl
 RUN apt install openssl -y \
-	&& openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
+	&& openssl req -x509 -nodes \
+	-out /etc/nginx/ssl/inception.crt \
+	 -keyout /etc/nginx/ssl/inception.key \
+	  -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
 RUN mkdir -p /var/run/nginx \
 	&& chmod 755 /etc/nginx/ssl \
 	&& useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
@@ -22,4 +25,5 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 8443
 
 # Run NGINX in the foreground
+#CMD bash
 CMD ["nginx", "-g", "daemon off;"]

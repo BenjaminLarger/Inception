@@ -5,8 +5,8 @@ echo "Starting MySQL server..."
 mysqld_safe &
 
 # Wait for the MySQL server to start
-echo "Waiting for MySQL server to start..."
 while ! mysqladmin ping --silent; do
+echo "Waiting for MySQL server to start..."
     sleep 1
 done
 
