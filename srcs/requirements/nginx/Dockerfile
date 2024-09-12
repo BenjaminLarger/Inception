@@ -11,7 +11,7 @@ RUN apt install openssl -y \
 	&& openssl req -x509 -nodes \
 	-out /etc/nginx/ssl/inception.crt \
 	 -keyout /etc/nginx/ssl/inception.key \
-	  -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
+	  -subj "/C=ES/ST=AND/L=Malaga/O=42/OU=42/CN=blarger.42.fr/UID=login"
 RUN mkdir -p /var/run/nginx \
 	&& chmod 755 /etc/nginx/ssl \
 	&& useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
@@ -20,6 +20,8 @@ RUN chown -R www-data:www-data /var/www/html
 
 # Copy custom NGINX configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+#delete
+COPY tools/index.html /etc/index.html
 
 # Expose port 443 for HTTPS
 EXPOSE 8443

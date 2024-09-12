@@ -2,8 +2,8 @@
 /** The name of the database for WordPress */
 define( 'DB_NAME', $MYSQL_DATABASE );
 /** MySQL database username */
-define( 'DB_USER', 'username_here' );
+define( 'DB_USER', $MYSQL_USER );
 /** MySQL database password */
-define( 'DB_PASSWORD', 'password_here' );
+define( 'DB_PASSWORD', $MYSQL_PASSWORD );
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', $_HOST );
