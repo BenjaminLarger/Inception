@@ -10,14 +10,10 @@ echo "Waiting for MySQL server to start..."
     sleep 1
 done
 
-# Debug: Print environment variables
-echo "Environment variables :"
-echo "MYSQL_USER: ${MYSQL_USER}"
-echo "MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
-echo "MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}"
-echo "_HOST: ${_HOST}"
-echo "MYSQL_DATABASE: ${MYSQL_DATABASE}\n"
+if [ -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
+	echo "Database already exist."
 
+else
 echo "MySQL server started."
 
 # Create a database (if the database does not exist)
@@ -44,7 +40,8 @@ mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 
 echo "Restart"
 mysqld_safe &
-
+fi
+exec "$@"
 # Open a bash shell -> delete
 #echo "Opening bash shell..."
 #exec bash

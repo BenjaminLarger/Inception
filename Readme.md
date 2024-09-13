@@ -14,5 +14,9 @@ docker container logs <containerID>
 ##Finding the IP Address of the MariaDB Container
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <mariadb_container_id>
 
+##Enter into a container
+docker ps
+docker exec -it container_name /bin/bash
+
 #To fix
 associate mariadb header with the corresponding IP address
