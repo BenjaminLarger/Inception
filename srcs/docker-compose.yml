@@ -49,13 +49,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/blarger/Desktop/mariadb'
+      device: '/home/blarger/data/mariadb'
 #  wordpress_data:
 #    driver: local
 #    driver_opts:
 #      type: 'none'
 #      o: 'bind'
-#      device: '/home/blarger/Desktop/wordpress'	
+#      device: '/home/blarger/data/wordpress'	
 #  networks:
 #   app-network:
 #    driver: bridge
