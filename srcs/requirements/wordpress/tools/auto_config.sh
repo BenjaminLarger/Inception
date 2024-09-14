@@ -7,21 +7,20 @@
 #done
 
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
-		echo "Download wordpress"
-		cd /var/www
-		wget https://wordpress.org/latest.tar.gz
-		tar -xzvf latest.tar.gz
-		rm latest.tar.gz
-		cd wordpress
-		sed "s/database_name_here/$MYSQL_DATABASE/g" wp-config-sample.php > wp-config-sample.php.tmp
-		mv wp-config-sample.php.tmp wp-config-sample.php
-		sed "s/password_here/$MYSQL_PASSWORD/g" wp-config-sample.php > wp-config-sample.php.tmp 
-		mv wp-config-sample.php.tmp wp-config-sample.php
-		sed '/put your unique phrase here/d' wp-config-sample.php > wp-config-sample.php.tmp
-		curl -s https://api.wordpress.org/secret-key/1.1/salt/ >> wp-config-sample.php.tmp
-		mv wp-config-sample.php.tmp wp-config-sample.php
+		wp core download --allow-root --path='/var/www/wordpress'
+		wp config create --allow-root --dbname=$MYSQL_DATABASE \
+		--dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD \
+		--dbhost=mariadb:3306 --path='/var/www/wordpress'
+
+		wp core install --url=$DOMAIN_NAME --title=$SITE_TITLE \
+		--admin_user=$ADMIN_SITE --admin_password=$ADMIN_PASSWORD\
+		--admin_email=$ADMIN_EMAIL --path='/var/www/wordpress'\
+		--allow-root
+
+		wp user create $USER_LOGIN $USER_EMAIL \
+		--role=author --user_pass=$USER_PASSWORD\
+		 --allow-root
 else
 	echo "wp-config.php already exist at /var/www/wordpress"
 fi
-
-echo "$@"
+/usr/sbin/php-fpm7.3 -F

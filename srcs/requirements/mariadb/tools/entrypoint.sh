@@ -41,6 +41,7 @@ mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 echo "Restart"
 mysqld_safe &
 fi
+
 exec "$@"
 # Open a bash shell -> delete
 #echo "Opening bash shell..."

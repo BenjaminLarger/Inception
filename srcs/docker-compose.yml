@@ -11,8 +11,8 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     expose:
       - "9000"
-#    volumes:
-#      - wordpress_data:/var/www/html
+    volumes:
+      - wordpress_data:/var/www/html
     restart: unless-stopped
     networks:
     - inception
@@ -50,12 +50,12 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/blarger/data/mariadb'
-#  wordpress_data:
-#    driver: local
-#    driver_opts:
-#      type: 'none'
-#      o: 'bind'
-#      device: '/home/blarger/data/wordpress'	
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/blarger/data/wordpress'	
 #  networks:
 #   app-network:
 #    driver: bridge

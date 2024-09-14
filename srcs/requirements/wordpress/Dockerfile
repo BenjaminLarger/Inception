@@ -16,19 +16,28 @@ RUN apt-get update \
 
 EXPOSE 9000
 
-#WORKDIR /var/www
-COPY conf/www.conf php/7.3/fpm/pool.d/
+#Volume
 RUN mkdir -p /var/www/html && chmod 750 /var/www/html
 
-RUN mkdir /run/php
 
-#CMD bash
+#Enable php to run
+COPY conf/www.conf php/7.3/fpm/pool.d/
+RUN mkdir -p /run/php
 
+#Confing wordpress and launch php server
 COPY tools/auto_config.sh /auto_config.sh
 RUN chmod +x /auto_config.sh
 RUN mkdir -p /var/www/wordpress
+
+WORKDIR /var/www
+#Configure CLI
+RUN curl -f -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp 
+
 ENTRYPOINT ["/auto_config.sh"]
 
 #Launch PHP FPM in foreground and ignore deamonize from conf file (-F)
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+#CMD ["/usr/sbin/php-fpm7.3", "-F"]
+#CMD ["tail", "-f", "/dev/null"]
 

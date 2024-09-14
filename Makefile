@@ -14,6 +14,9 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
 all:
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
+restart:
+	@docker compose -f ./srcs/docker-compose.yml down
+	@docker compose -f ./srcs/docker-compose.yml up -d --build
 build:
 	@echo -e "${YELLOW}⏳ building...${THIS_FILE} {NC}"
 	docker-compose -f srcs/docker-compose.yml build $(c)
