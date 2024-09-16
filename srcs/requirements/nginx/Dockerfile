@@ -27,5 +27,5 @@ COPY tools/index.html /etc/index.html
 EXPOSE 8443
 
 # Run NGINX in the foreground
-CMD bash
-#CMD ["nginx", "-g", "daemon off;"]
+#CMD bash
+CMD ["nginx", "-g", "daemon off;"]

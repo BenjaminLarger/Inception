@@ -26,22 +26,22 @@ services:
       - "3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-    restart: unless-stopped
+    restart: no
     networks:
         - inception
 
-#  nginx:
-#    build: ./requirements/nginx
-#    container_name: nginx
-#    env_file: .env
-#    #    env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
-#    ports:
-#    - "8443:443" #change to 443:443 when submission
-#    restart: unless-stopped
-  #  networks:
- #     - inception
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    env_file: .env
+      #  env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
+    ports:
+    - "8443:443" # change to 443:443 when submission
+    restart: unless-stopped
+    networks:
+      - inception
 #    volumes:
-#    - ./nginx.conf:/etc/nginx/nginx.conf:ro
+#    - ./nginx.conf:/etc/nginx/nginx.conf
 
 volumes:
   mariadb_data:
