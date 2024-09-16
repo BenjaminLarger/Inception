@@ -6,7 +6,8 @@
 #    sleep 2
 #done
 
-if [ ! -f /var/www/wordpress/wp-config.php ]; then
+if [ ! -f /var/www/html/wp-config.php ]; then
+		echo "wp-config.php does not exist "
 		wp core download --allow-root --path='/var/www/wordpress'
 		wp config create --allow-root --dbname=$MYSQL_DATABASE \
 		--dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD \
@@ -18,11 +19,12 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 		--allow-root
 
 		wp user create $USER_LOGIN $USER_EMAIL \
-		--role=author --user_pass=$USER_PASSWORD\
+		--role=author --user_pass=$USER_PASSWORD \
+		--path='/var/www/wordpress'\
 		 --allow-root
 
 		cp -r /var/www/wordpress/* /var/www/html/
 else
-	echo "wp-config.php already exist at /var/www/wordpress"
+	echo "wp-config.php already exist at /var/www/html"
 fi
 /usr/sbin/php-fpm7.3 -F
