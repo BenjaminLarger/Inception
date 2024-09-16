@@ -15,8 +15,9 @@ RUN apt install openssl -y \
 RUN mkdir -p /var/run/nginx \
 	&& chmod 755 /etc/nginx/ssl \
 	&& useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
-RUN chmod 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+
+# wordpress_data volume must be accessible
+RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
 # Copy custom NGINX configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf

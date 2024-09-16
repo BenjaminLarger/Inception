@@ -20,6 +20,8 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 		wp user create $USER_LOGIN $USER_EMAIL \
 		--role=author --user_pass=$USER_PASSWORD\
 		 --allow-root
+
+		cp -r /var/www/wordpress/* /var/www/html/
 else
 	echo "wp-config.php already exist at /var/www/wordpress"
 fi

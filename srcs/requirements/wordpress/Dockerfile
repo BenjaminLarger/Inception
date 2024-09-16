@@ -17,10 +17,10 @@ RUN apt-get update \
 EXPOSE 9000
 
 #Volume
-RUN mkdir -p /var/www/html && chmod 750 /var/www/html
-
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html && chmod 750 /var/www/html
 
 #Enable php to run
+RUN mkdir -p php/7.3/fpm/pool.d
 COPY conf/www.conf php/7.3/fpm/pool.d/
 RUN mkdir -p /run/php
 
