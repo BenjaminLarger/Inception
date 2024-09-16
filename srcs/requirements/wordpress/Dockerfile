@@ -27,7 +27,7 @@ RUN mkdir -p /run/php
 #Confing wordpress and launch php server
 COPY tools/auto_config.sh /auto_config.sh
 RUN chmod +x /auto_config.sh
-RUN mkdir -p /var/www/wordpress
+RUN mkdir -p /var/www/wordpress && chmod 750 /var/www/wordpress
 
 WORKDIR /var/www
 #Configure CLI
