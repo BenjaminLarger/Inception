@@ -37,3 +37,6 @@ nginx:
 	@echo -e "${YELLOW}⏳ enter into nginx container...${THIS_FILE} {NC} "
 	docker exec -it nginx /bin/bash
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
+rm_volumes:
+	@echo -e "${RED}⏳ remove wordpress and mariadb volumes${THIS_FILE} {NC} "
+	docker volume rm srcs_wordpress_data srcs_mariadb_data
