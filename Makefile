@@ -13,10 +13,11 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 .PHONY: help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell
 
 all:
-	@docker compose -f ./srcs/docker-compose.yml up -d --build
+	@docker compose -f ./srcs/docker-compose.yml up --build
 restart:
 	@docker compose -f ./srcs/docker-compose.yml down
-	@docker compose -f ./srcs/docker-compose.yml up -d --build
+	docker volume rm srcs_wordpress_data srcs_mariadb_data
+	@docker compose -f ./srcs/docker-compose.yml up --build
 down:
 	@echo -e "${YELLOW}⏳ shutting down...${THIS_FILE} {NC}"
 	docker-compose -f srcs/docker-compose.yml down $(c)

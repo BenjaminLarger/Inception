@@ -11,6 +11,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN chown -R mysql:mysql /var/lib/mysql
 # Copy configuration files and scripts
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY tools/entrypoint.sh /entrypoint.sh
@@ -22,5 +23,6 @@ RUN chmod +x /entrypoint.sh
 EXPOSE 3306
 
 # Set the entrypoint and command
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+#ENTRYPOINT ["/entrypoint.sh"]
+#CMD ["mysqld", "--bind-address=0.0.0.0"]
+CMD ["tail", "-f", "/dev/null"]

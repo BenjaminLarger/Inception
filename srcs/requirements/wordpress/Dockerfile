@@ -19,6 +19,7 @@ RUN apt-get update && \
 RUN mkdir -p /var/www/html /var/www/wordpress /run/php /etc/php/7.3/fpm/pool.d && \
     chown -R www-data:www-data /var/www/html /var/www/wordpress && \
     chmod 750 /var/www/html /var/www/wordpress
+		
 
 # Copy configuration files and scripts
 COPY tools/wordpress_config.sh /wordpress_config.sh
