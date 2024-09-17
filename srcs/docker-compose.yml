@@ -12,7 +12,7 @@ services:
     expose:
       - "9000"
     ports:
-      - "9000:9000"
+      - "8444:9000" #delete
     volumes:
       - wordpress_data:/var/www/html
     restart: no

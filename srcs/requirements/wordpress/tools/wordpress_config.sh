@@ -14,14 +14,26 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--dbhost=mariadb:3306 --path='/var/www/wordpress'
 
 		wp core install --url=$DOMAIN_NAME --title=$SITE_TITLE \
-		--admin_user=$ADMIN_SITE --admin_password=$ADMIN_PASSWORD\
-		--admin_email=$ADMIN_EMAIL --path='/var/www/wordpress'\
+		--admin_user=$ADMIN_SITE --admin_password=$ADMIN_PASSWORD \
+		--admin_email=$ADMIN_EMAIL --path='/var/www/wordpress' \
 		--allow-root
 
 		wp user create $USER_LOGIN $USER_EMAIL \
 		--role=author --user_pass=$USER_PASSWORD \
-		--path='/var/www/wordpress'\
+		--path='/var/www/wordpress' \
 		 --allow-root
+		
+		##Customization
+		#Change theme
+		wp theme install twentytwentytwo --path='/var/www/wordpress' --allow-root
+		wp theme activate twentytwentytwo --path='/var/www/wordpress' --allow-root
+		#Background
+		wp theme mod set background_color '000000' --path='/var/www/wordpress' --allow-root
+		#Blogname
+		wp option update blogname 'Inception' --path='/var/www/wordpress' --allow-root
+		#Wallpaper
+		HEADER_IMAGE_ID=$(wp media import /media/Inception.jpg --path='/var/www/wordpress' --allow-root --porcelain)
+		wp theme mod set header_image $HEADER_IMAGE_ID --path='/var/www/wordpress' --allow-root
 
 		cp -r /var/www/wordpress/* /var/www/html/
 else

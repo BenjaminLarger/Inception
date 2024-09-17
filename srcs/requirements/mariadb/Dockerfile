@@ -1,16 +1,26 @@
 FROM debian:10.11
 
-RUN apt-get update\
-	&& apt upgrade -y \
-	&& apt install mariadb-server mariadb-client -y 
-#&& sudo mysqld_safe & <enter $MYSQL_ROOT_PASSWORD password>
+# Update and install necessary packages in a single RUN command
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y mariadb-server mariadb-client && \
+    # Create necessary directories, set permissions, and clean up
+    mkdir -p /var/lib/mysql && \
+    chown -R mysql:mysql /var/lib/mysql && \
+    chmod 755 /var/lib/mysql && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy configuration files and scripts
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY tools/entrypoint.sh /entrypoint.sh
+
+# Set permissions for the entrypoint script
+RUN chmod +x /entrypoint.sh
+
+# Expose the necessary port
 EXPOSE 3306
 
-COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
-COPY tools/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-RUN mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql && chmod 755 /var/lib/mysql/
-
+# Set the entrypoint and command
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["mysqld", "--bind-address=0.0.0.0"]
