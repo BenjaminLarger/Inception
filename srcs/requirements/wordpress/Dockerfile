@@ -29,6 +29,10 @@ COPY tools/auto_config.sh /auto_config.sh
 RUN chmod +x /auto_config.sh
 RUN mkdir -p /var/www/wordpress && chmod 750 /var/www/wordpress
 
+# wordpress_data volume must be accessible
+RUN mkdir -p var/www/html && chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
+
+
 WORKDIR /var/www
 #Configure CLI
 RUN curl -f -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \

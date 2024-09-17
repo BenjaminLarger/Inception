@@ -17,7 +17,7 @@ RUN mkdir -p /var/run/nginx \
 	&& useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
 
 # wordpress_data volume must be accessible
-RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
+RUN mkdir -p var/www/html && chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
 # Copy custom NGINX configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf
