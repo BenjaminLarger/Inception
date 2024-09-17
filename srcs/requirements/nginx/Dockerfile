@@ -7,6 +7,7 @@ RUN apt-get update \
 	&& apt install curl -y
 
 RUN mkdir -p /etc/nginx/ssl
+
 RUN apt install openssl -y \
 	&& openssl req -x509 -nodes \
 	-out /etc/nginx/ssl/inception.crt \
@@ -17,7 +18,8 @@ RUN mkdir -p /var/run/nginx \
 	&& useradd -r -d /var/cache/nginx/ -s /sbin/nologin -U nginx
 
 # wordpress_data volume must be accessible
-RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
+RUN mkdir -p /var/www/html && chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html \
+	&& chmod 755 /var/www/html/* && chown -R www-data:www-data /var/www/html/*
 
 # Copy custom NGINX configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf
@@ -25,7 +27,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY tools/index.html /etc/index.html
 
 # Expose port 443 for HTTPS
-EXPOSE 8443
+EXPOSE 443
 
 # Run NGINX in the foreground
 #CMD bash
