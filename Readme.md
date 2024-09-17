@@ -35,6 +35,8 @@ Save the file and exit the editor. This will allow your local machine to resolve
 docker exec -it wordpress_container_name bash
 ps aux | grep php-fpm
 
+## Test connectivity with php-fpm
+nc -zv wordpress 9000
 
 # To fix
 associate mariadb header with the corresponding IP address

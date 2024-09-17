@@ -1,5 +1,5 @@
 services:
-
+#!!! change restart
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
@@ -15,7 +15,7 @@ services:
       - "9000:9000"
     volumes:
       - wordpress_data:/var/www/html
-    restart: unless-stopped
+    restart: no
     networks:
     - inception
     depends_on:
@@ -29,7 +29,7 @@ services:
       - "3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-    restart: unless-stopped
+    restart: no
     networks:
         - inception
 
@@ -39,8 +39,8 @@ services:
     env_file: .env
       #  env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
     ports:
-    - "443:443" # change to 443:443 when submission
-    restart: unless-stopped
+    - "8443:443" # change to 443:443 when submission
+    restart: no
     networks:
       - inception
     depends_on:

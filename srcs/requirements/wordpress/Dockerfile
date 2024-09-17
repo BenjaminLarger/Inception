@@ -21,7 +21,6 @@ RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html && chmod 
 
 #Enable php to run
 RUN mkdir -p php/7.3/fpm/pool.d
-COPY conf/www.conf php/7.3/fpm/pool.d/
 RUN mkdir -p /run/php
 
 #Confing wordpress and launch php server
@@ -32,6 +31,8 @@ RUN mkdir -p /var/www/wordpress && chmod 750 /var/www/wordpress
 # wordpress_data volume must be accessible
 RUN mkdir -p var/www/html && chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
+#php config
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 WORKDIR /var/www
 #Configure CLI

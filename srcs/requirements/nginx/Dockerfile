@@ -4,7 +4,8 @@ RUN apt-get update \
 	&& apt upgrade -y \
 	&& apt install nginx -y \
 	&& apt install vim -y \
-	&& apt install curl -y
+	&& apt install curl -y 
+
 
 RUN mkdir -p /etc/nginx/ssl
 
@@ -27,7 +28,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY tools/index.html /etc/index.html
 
 # Expose port 443 for HTTPS
-EXPOSE 443
+EXPOSE 8443
 
 # Run NGINX in the foreground
 #CMD bash
