@@ -37,7 +37,7 @@ services:
     env_file: .env
       #  env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
     ports:
-    - "8443:443" # change to 443:443 when submission
+    - "443:443" # change to 443:443 when submission
     restart: always
     networks:
       - inception

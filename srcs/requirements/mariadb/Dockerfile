@@ -28,6 +28,6 @@ RUN chmod 644 /usr/local/bin/wordpress.sql
 EXPOSE 3306
 
 # Set the entrypoint and command
-#ENTRYPOINT ["/usr/bin/tini", "--"]
-#CMD ["bash", "mariadb_init.sh"]
-CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["bash", "mariadb_init.sh"]
+#CMD ["tail", "-f", "/dev/null"]
