@@ -32,9 +32,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		#Blogname
 		wp option update blogname 'Inception' --path='/var/www/wordpress' --allow-root
 		#Wallpaper
-		HEADER_IMAGE_ID=$(wp media import /media/Inception.jpg --path='/var/www/wordpress' --allow-root --porcelain)
-		wp theme mod set header_image $HEADER_IMAGE_ID --path='/var/www/wordpress' --allow-root
-
+		cp /media/Inception.jpg /var/www/html/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png
+		#Apply changes
 		cp -r /var/www/wordpress/* /var/www/html/
 else
 	echo "wp-config.php already exist at /var/www/html"
