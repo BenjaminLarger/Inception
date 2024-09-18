@@ -24,7 +24,7 @@ RUN mkdir -p /var/www/html /var/www/wordpress /run/php /etc/php/7.3/fpm/pool.d &
 # Copy configuration files and scripts
 COPY tools/wordpress_config.sh /wordpress_config.sh
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY conf/inception.jpg /media/Inception.jpg
+COPY conf/inception.png /media/Inception.png
 
 # Set permissions for the script
 RUN chmod +x /wordpress_config.sh

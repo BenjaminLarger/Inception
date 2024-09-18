@@ -30,7 +30,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		#Blogname
 		wp option update blogname 'Inception' --path='/var/www/wordpress' --allow-root
 		#Wallpaper
-		mv /media/Inception.jpg /var/www/wordpress/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png
+		mv /media/Inception.png /var/www/wordpress/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png
 		#Apply changes
 		cp -r /var/www/wordpress/* /var/www/html/
 else
