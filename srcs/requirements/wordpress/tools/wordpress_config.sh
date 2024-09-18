@@ -27,12 +27,10 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		#Change theme
 		wp theme install twentytwentytwo --path='/var/www/wordpress' --allow-root
 		wp theme activate twentytwentytwo --path='/var/www/wordpress' --allow-root
-		#Background
-		wp theme mod set background_color '000000' --path='/var/www/wordpress' --allow-root
 		#Blogname
 		wp option update blogname 'Inception' --path='/var/www/wordpress' --allow-root
 		#Wallpaper
-		cp /media/Inception.jpg /var/www/html/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png
+		mv /media/Inception.jpg /var/www/wordpress/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png
 		#Apply changes
 		cp -r /var/www/wordpress/* /var/www/html/
 else

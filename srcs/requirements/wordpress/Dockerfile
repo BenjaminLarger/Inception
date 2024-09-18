@@ -42,9 +42,9 @@ EXPOSE 9000
 
 # Set the entrypoint
 
-#ENTRYPOINT ["/wordpress_config.sh"]
+ENTRYPOINT ["/wordpress_config.sh"]
 
 #Launch PHP FPM in foreground and ignore deamonize from conf file (-F)
 #CMD ["/usr/sbin/php-fpm7.3", "-F"]
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]
 

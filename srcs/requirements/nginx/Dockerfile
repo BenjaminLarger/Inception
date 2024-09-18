@@ -26,8 +26,8 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 # Copy custom index.html file
 COPY tools/index.html /etc/index.html
 
-# Expose port 8443 for HTTPS
-EXPOSE 8443
+# Expose port 443 for HTTPS
+EXPOSE 443
 
 # Run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
