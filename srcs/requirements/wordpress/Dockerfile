@@ -1,4 +1,4 @@
-FROM debian:10.11
+FROM debian:bullseye
 
 # Update and install necessary packages
 RUN apt-get update && \
@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y \
         curl \
         wget \
-        php7.3 \
+        php7.4 \
         php-fpm \
         php-mysql \
         mariadb-client \
@@ -16,14 +16,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create necessary directories and set permissions
-RUN mkdir -p /var/www/html /var/www/wordpress /run/php /etc/php/7.3/fpm/pool.d && \
+RUN mkdir -p /var/www/html /var/www/wordpress /run/php /etc/php/7.4/fpm/pool.d && \
     chown -R www-data:www-data /var/www/html /var/www/wordpress && \
     chmod 750 /var/www/html /var/www/wordpress
 		
 
 # Copy configuration files and scripts
 COPY tools/wordpress_config.sh /wordpress_config.sh
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY conf/inception.png /media/Inception.png
 
 # Set permissions for the script
