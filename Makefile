@@ -16,7 +16,6 @@ all:
 	@docker compose -f ./srcs/docker-compose.yml up --build
 restart:
 	@docker compose -f ./srcs/docker-compose.yml down
-	docker volume rm srcs_wordpress_data srcs_mariadb_data
 	@docker compose -f ./srcs/docker-compose.yml up --build
 down:
 	@echo -e "${YELLOW}⏳ shutting down...${THIS_FILE} {NC}"
@@ -26,16 +25,16 @@ ps:
 	@echo "🔍 List of the Docker containers: 🔍"
 	docker ps
 mariadb:
-	@echo -e "${YELLOW}⏳ enter into mariadb container...${THIS_FILE} {NC}"
+	@echo -e "⏳ enter into mariadb container...${THIS_FILE} {NC}"
 	docker exec -it mariadb /bin/bash
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 wordpress:
-	@echo -e "${YELLOW}⏳ enter into wordpress container... $(c)...${THIS_FILE} {NC} "
+	@echo -e "⏳ enter into wordpress container... $(c)...${THIS_FILE} {NC} "
 	docker exec -it wordpress /bin/bash
 	@(cd srcs && docker-compose run --rm wordpress /bin/bash)
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 nginx:
-	@echo -e "${YELLOW}⏳ enter into nginx container...${THIS_FILE} {NC} "
+	@echo -e "⏳ enter into nginx container...${THIS_FILE} {NC} "
 	docker exec -it nginx /bin/bash
 	@echo "${BLUE_BOLD}🐳  $(THIS_FILE) Started up successfully! 🐳 ${BLUE_BOLD} {NC}"
 rm_volumes:

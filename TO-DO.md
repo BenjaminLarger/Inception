@@ -3,3 +3,4 @@
 3. Include .env to .gitignore
 4. Check restart in docker-compose
 5. Edit Makefile to not remove volumes
+6. Understand how connections are made

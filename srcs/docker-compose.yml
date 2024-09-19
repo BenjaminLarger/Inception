@@ -1,19 +1,13 @@
 services:
-#!!! change restart
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
     env_file: .env
-    environment:
-      - WORDPRESS_DB_HOST=mariadb:3306
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
     expose:
       - "9000"
     volumes:
       - wordpress_data:/var/www/html
-    restart: no
+    restart: unless-stopped
     networks:
     - inception
     depends_on:
@@ -23,11 +17,11 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb
     env_file: .env
-    expose: #Use expose when you only need the container's services to be accessible to other containers within the same Docker network.
+    expose:
       - "3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-    restart: no
+    restart: unless-stopped
     networks:
         - inception
 
@@ -35,10 +29,9 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     env_file: .env
-      #  env_file: "/sgoinfre/students/blarger/Inception/srcs/.env"
     ports:
-    - "443:443" # change to 443:443 when submission
-    restart: always
+    - "443:443"
+    restart: unless-stopped
     networks:
       - inception
     depends_on:
@@ -59,9 +52,6 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/blarger/data/wordpress'	
-#  networks:
-#   app-network:
-#    driver: bridge
 
 networks:
   inception:
