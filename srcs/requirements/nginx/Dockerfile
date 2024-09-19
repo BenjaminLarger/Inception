@@ -11,6 +11,7 @@ RUN apt-get update && \
     # Create necessary directories and set permissions
     mkdir -p /etc/nginx/ssl /var/run/nginx /var/www/html && \
     chmod 755 /etc/nginx/ssl /var/www/html && \
+		chmod 755 /var/www/html &&\
     chown -R www-data:www-data /var/www/html && \
     # Generate SSL certificate
     openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=ES/ST=AND/L=Malaga/O=42/OU=42/CN=blarger.42.fr/UID=login" && \
