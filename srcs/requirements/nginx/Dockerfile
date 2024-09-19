@@ -1,4 +1,4 @@
-FROM debian:10.11
+FROM debian:bullseye
 
 # Update and install necessary packages in a single RUN command
 RUN apt-get update && \
